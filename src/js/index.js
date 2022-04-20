@@ -10,6 +10,18 @@
 const $ = (selector) => document.querySelector(selector);
 
 function App() {
+    // TODO 메뉴 수정
+    // - [ ] 메뉴의 수정 버튼 클릭 이벤트를 받고, 메뉴 수정하는 모달창이 뜬다.
+    // - [ ] 모달창에서 신규메뉴명을 입력받고, 확인버튼을 누르면 메뉴가 수정된다.
+
+    $("#espresso-menu-list").addEventListener("click", (e) => {
+        if(e.target.classList.contains('menu-edit-button')) {
+            const $menuName = e.target.closest("li").querySelector('.menu-name')
+            const updatedMenuName = prompt('메뉴명을 수정하세요.', $menuName.innerText)
+            $menuName.innerText = updatedMenuName
+        }
+    })
+
     // form 태그가 자동으로 전송되는걸 막음.
     $("#espresso-menu-form").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -22,17 +34,17 @@ function App() {
             return;
         }
         const menuItemTemplate = (espressoMenuName) => {
-            return `<li className="menu-list-item d-flex items-center py-2">
-            <span className="w-100 pl-2 menu-name">${espressoMenuName}</span>
+            return `<li class="menu-list-item d-flex items-center py-2">
+            <span class="w-100 pl-2 menu-name">${espressoMenuName}</span>
             <button
                 type="button"
-                className="bg-gray-50 text-gray-500 text-sm mr-1 menu-edit-button"
+                class="bg-gray-50 text-gray-500 text-sm mr-1 menu-edit-button"
             >
                 수정
             </button>
             <button
                 type="button"
-                className="bg-gray-50 text-gray-500 text-sm menu-remove-button"
+                class="bg-gray-50 text-gray-500 text-sm menu-remove-button"
             >
                 삭제
             </button>
@@ -65,10 +77,6 @@ function App() {
 }
 
 App()
-
-// TODO 메뉴 수정
-// - [ ] 메뉴의 수정 버튼 클릭 이벤트를 받고, 메뉴 수정하는 모달창이 뜬다.
-// - [ ] 모달창에서 신규메뉴명을 입력받고, 확인버튼을 누르면 메뉴가 수정된다.
 
 // TODO 메뉴 삭제
 // - [ ] 메뉴 삭제 버튼 클릭 이벤트를 받고, 메뉴 삭제 컨펌 모달창이 뜬다.
